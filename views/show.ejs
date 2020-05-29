@@ -1,0 +1,53 @@
+    <%- include ('partials/header') %>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search">
+        <div class="input-group-append">
+            <button class="btn btn-secondary" type="button">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <% user.forEach(function(ct){ %>
+
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-default" data-toggle="collapse" data-target="#<%= ct._id %>"
+                    aria-expanded="true" aria-controls="<%= ct._id %>">
+                    <%= ct.name %>
+                </button>
+            </h5>
+        </div>
+
+        <div id="<%= ct._id %>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <div class="row ">
+                    <div class="col">
+                        <h5><%= ct.dob%></h5>
+                    </div>
+                    <div class="offset-6"> </div>
+                    <div class="col">
+                        <a href="/user/<%= ct._id %>/edit" class="btn btn-primary">Edit</a>
+                        <form action="/user/<%= ct._id %>?_method=DELETE" style="display: inline;" method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="details">
+                    <div class="row">
+                        <div class="col">
+                            <i class="d-inline-block fa fa-phone"></i>
+                            <p class="d-inline-block">+91-<%= ct.phone %></p>
+                        </div>
+                        <div class="col">
+                            <i class="d-inline-block fa fa-envelope"></i>
+                            <p class="d-inline-block"><%= ct.email %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% }); %>
+    <a class="pull-right add" href="/user/new"><span class="fa fa-plus fa-2x"></span></a>
+    <%- include ('partials/footer') %>
